@@ -10,7 +10,7 @@ public class TestExample {
     @Test
     public void testExampleSqrt(){
         double result = testSqrt(6.66);
-        assertEquals("Wrong sqty!", result, 2.5806975801127883, 0);
+        assertEquals("Wrong sqrt!", result, 2.5806975801127883, 0);
     }
 
     @Test
