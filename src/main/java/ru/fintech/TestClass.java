@@ -13,4 +13,22 @@ public abstract class TestClass {
     public static double testCos(double num) {
         return Math.cos(num);
     }
+
+    public static int testFactorial1(int count) {
+        int result = 1;
+        for (int i = 1; i <=count; i ++){
+            result = result*i;
+        }
+        return result;
+    }
+
+
+    public static int testFactorial2(int count) {
+        int result;
+        if (count==1)
+            return 1;
+        result = count*testFactorial2(count-1);
+        return result;
+    }
+
 }
