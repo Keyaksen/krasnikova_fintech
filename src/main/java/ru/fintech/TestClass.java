@@ -6,7 +6,7 @@ public abstract class TestClass {
         return Math.sqrt(num);
     }
 
-    public static double testPow2(double num, double pow1) {
+    public static double testPow2(double num) {
         return Math.pow(num,2.0);
     }
 

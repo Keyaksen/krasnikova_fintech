@@ -15,7 +15,7 @@ public class TestExample {
 
     @Test
     public void testExamplePow2(){
-        double result = testPow2(6.66, 2.0);
+        double result = testPow2(6.66);
         assertEquals("Wrong pow!", result, 44.3556, 0);
 
     }
