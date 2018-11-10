@@ -2,6 +2,7 @@ package ru.fintech;
 
 public abstract class TestClass {
 
+
     public static double testSqrt(double num) {
         return Math.sqrt(num);
     }
@@ -30,5 +31,6 @@ public abstract class TestClass {
         result = count*testFactorial2(count-1);
         return result;
     }
+
 
 }
