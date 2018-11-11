@@ -6,9 +6,13 @@ public abstract class TestClass {
         return Math.sqrt(num);
     }
 
-    public static double testPow2(double num) {
-        return Math.pow(num,2.0);
+    public static double testPow2positive(double num) {
+
+        if (num>0){
+            return Math.pow(num,2.0);}
+        else return 0.0;
     }
+    public static double testPow2(double num) {return Math.pow(num,2.0);}
 
     public static double testCos(double num) {
         return Math.cos(num);
