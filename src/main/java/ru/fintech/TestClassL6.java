@@ -19,15 +19,9 @@ public abstract class TestClassL6 {
     else return false;
     }
 
-    public static double squareRegTetragone(double a) {
-        double result;
-        return result = testPow2positive(a);}
+    public static double squareRegTetragone(double a) {return testPow2positive(a);}
 
-    public static double squareCirсle(double r) {
-        double result;
-        result = Math.PI*testPow2positive(r);
-        return result;
-    }
+    public static double squareCirсle(double r) {return Math.PI*testPow2positive(r);}
 
 
 }
