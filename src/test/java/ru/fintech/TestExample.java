@@ -34,7 +34,7 @@ public class TestExample {
     public void testTriangleSquare() {
         System.out.println("Test triangle area");
         assertTrue(5.724==(Math.round((Double)(squareTriangle(3, 4.5, 6.6))*1000)/1000.0),"Wrong area");
-        assertEquals(1.609,Math.round((Double)(squareTriangle(3, 3, 5.9))*1000)/1000.0,"Wrong area");
+        assertEquals(1.609,(Double)(squareTriangle(3, 3, 5.9)),0.001, "Wrong area!");
     }
 
     @Test
