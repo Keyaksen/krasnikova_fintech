@@ -1,6 +1,6 @@
-package ru.fintech;
-import static ru.fintech.TestClass.testPow2positive;
-import static ru.fintech.TestClassL6.*;
+package ru.fintech.lesson6;
+import static ru.fintech.lesson6.TestClass.testPow2positive;
+import static ru.fintech.lesson6.TestClassL6.*;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
