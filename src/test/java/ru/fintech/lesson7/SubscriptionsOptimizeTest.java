@@ -125,7 +125,7 @@ public String idCode;
    }
 
     @Test
-    @DisplayName("Deleting first subscription")
+    @DisplayName("Deleting last subscription")
     @Tag("delete")
     public void deleteSubscriptionsTest(){
         System.out.println("recall GET query");
