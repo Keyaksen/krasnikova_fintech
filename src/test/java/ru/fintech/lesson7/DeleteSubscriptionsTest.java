@@ -34,7 +34,7 @@ public class DeleteSubscriptionsTest {
         DataPreparation.createTSCSubscription();
         DataPreparation.createAAPLSubscription();
         getIdCodeForDelete();
-        System.out.println("-----------\"DELETE\" test-----------");
+        System.out.println("-----------\"DELETE\" Subscriptions test-----------");
         given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
                 .pathParam("subscription_id",idCode.get(0))
                 .delete("/contacts/{siebel_id}/subscriptions/{subscription_id}")
@@ -47,7 +47,7 @@ public class DeleteSubscriptionsTest {
     @DisplayName("Deleting nonexistent subscription")
     @Tag("delete")
     public void deleteSubscriptionsErrorTest(){
-        System.out.println("-----------\"DELETE\" test-----------");
+        System.out.println("-----------\"DELETE\" SubscriptionsError test-----------");
         String idWrongCode = "123abc123";
         given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
                 .pathParam("subscription_id",idWrongCode)
