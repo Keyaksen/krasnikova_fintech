@@ -1,7 +1,6 @@
 package ru.fintech.lesson7;
 
 import org.hamcrest.Matchers;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -28,7 +27,10 @@ public class PostSubscriptionsTest {
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .body("instrument_id", Matchers.equalTo("AAPL_SPBXM"))
+                .body("price_alert", Matchers.equalTo(94))
+                .body("ticker", Matchers.equalTo("AAPL"));
     }
 
     @Test
