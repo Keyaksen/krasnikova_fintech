@@ -1,9 +1,12 @@
 package ru.fintech.lesson7;
 
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import ru.fintech.entity.SubInfo;
+import ru.fintech.helper.DataPreparation;
 import ru.fintech.request.RequestModel;
 
 import java.util.List;
@@ -16,17 +19,21 @@ public class GetSubscriptionsTest {
     @BeforeEach
     public void preparation(){
         DataPreparation.deleteAllSubscriptions();
+        DataPreparation.createTSCSubscription();
+        DataPreparation.createAAPLSubscription();
     }
 
     @Test
     @DisplayName("Get all subscriptions")
     @Tag("get")
     public void getSubscriptionsSimpleTest(){
-        DataPreparation.createTSCSubscription();
-        DataPreparation.createAAPLSubscription();
         System.out.println("-----------\"GET\" SubscriptionsSimple test-----------");
-        given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
-                .get("/contacts/{siebel_id}/subscriptions")
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .get("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()
@@ -37,11 +44,13 @@ public class GetSubscriptionsTest {
     @DisplayName("Get all subscriptions to List")
     @Tag("get")
     public void getSubscriptionsExtractTest(){
-        DataPreparation.createTSCSubscription();
-        DataPreparation.createAAPLSubscription();
         System.out.println("-----------\"GET\" SubscriptionsExtract test-----------");
-        List<SubInfo> subInfo = given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
-                .get("/contacts/{siebel_id}/subscriptions")
+        List<SubInfo> subInfo = given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .get("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()
@@ -57,11 +66,11 @@ public class GetSubscriptionsTest {
     @DisplayName("Get all subscriptions without parameters")
     @Tag("get")
     public void getSubscriptionsWithoutParamsTest(){
-        DataPreparation.createTSCSubscription();
-        DataPreparation.createAAPLSubscription();
         System.out.println("-----------\"GET\" SubscriptionsWithoutParams test-----------");
         given().spec(RequestModel.getRequestSpecification())
-                .get("/contacts/{siebel_id}/subscriptions")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .get("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()
@@ -73,11 +82,13 @@ public class GetSubscriptionsTest {
     @DisplayName("Get all id of subscriptions")
     @Tag("get")
     public void getSubscriptionsIdCodeTest(){
-        DataPreparation.createTSCSubscription();
-        DataPreparation.createAAPLSubscription();
         System.out.println("-----------\"GET\" SubscriptionsIdCode test-----------");
-        idCode = given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
-                .get("/contacts/{siebel_id}/subscriptions")
+        idCode = given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .get("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()

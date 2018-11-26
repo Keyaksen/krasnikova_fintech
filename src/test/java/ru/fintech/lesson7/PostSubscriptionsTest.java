@@ -1,10 +1,13 @@
 package ru.fintech.lesson7;
 
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.fintech.helper.DataPreparation;
 import ru.fintech.request.RequestModel;
 
 import static io.restassured.RestAssured.given;
@@ -21,9 +24,13 @@ public class PostSubscriptionsTest {
     @Tag("post")
     public void postSubscriptionsTest(){
         System.out.println("-----------\"POST\" Subscriptions test-----------");
-        given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
                 .body(DataPreparation.createJSONObjectAAPL())
-                .post("/contacts/{siebel_id}/subscriptions")
+                .post("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()
@@ -39,9 +46,13 @@ public class PostSubscriptionsTest {
     public void postDuplicateSubscriptionsTest(){
         DataPreparation.createTSCSubscription();
         System.out.println("-----------\"POST\" DuplicateSubscriptions test-----------");
-        given().spec(RequestModel.getRequestSpecification("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15", "system_code", "T-API"))
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
                 .body(DataPreparation.createJSONObjectTSC())
-                .post("/contacts/{siebel_id}/subscriptions")
+                .post("/subscriptions")
                 .then()
                 .specification(RequestModel.getResponseSpecification())
                 .assertThat()

@@ -1,4 +1,4 @@
-package ru.fintech.lesson7;
+package ru.fintech.helper;
 
 import org.json.JSONObject;
 import ru.fintech.request.RequestModel;
@@ -31,30 +31,47 @@ public class DataPreparation {
 
     //creating TSC subscription
     public static void createTSCSubscription(){
-        given().spec(RequestModel.getRequestSpecification("create"))
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
                 .body(createJSONObjectTSC())
-                .post("/contacts/{siebel_id}/subscriptions");
+                .post("/subscriptions");
     }
 
     //creating AAPL subscription
     public static void createAAPLSubscription(){
-        given().spec(RequestModel.getRequestSpecification("create"))
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
                 .body(createJSONObjectAAPL())
-                .post("/contacts/{siebel_id}/subscriptions");
+                .post("/subscriptions");
     }
 
-
+    public static List<String> getIdCodeForDelete(){
+        return given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .get("/subscriptions")
+                .then()
+                .extract()
+                .jsonPath()
+                .getList("id",String.class);
+    }
 
     public static void deleteSubscription (String subscriptionId){
-        given().spec(RequestModel.getRequestSpecification("delete"))
+        given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
                 .pathParam("subscription_id",subscriptionId)
-                .delete("/contacts/{siebel_id}/subscriptions/{subscription_id}");
+                .delete("/subscriptions/{subscription_id}");
 
     }
 
     public static void deleteAllSubscriptions () {
-        List<String> idSubs = given().spec(RequestModel.getRequestSpecification("delete"))
-                .get("/contacts/{siebel_id}/subscriptions")
+        List<String> idSubs = given().spec(RequestModel.getRequestSpecification())
+                .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
+                .queryParam("system_code","T-API")
+                .get("/subscriptions")
                 .then()
                 .extract()
                 .jsonPath()
