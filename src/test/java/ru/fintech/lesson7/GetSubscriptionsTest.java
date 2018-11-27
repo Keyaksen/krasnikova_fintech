@@ -18,6 +18,7 @@ import static io.restassured.RestAssured.given;
 @Story("Получение подписок пользователя")
 @DisplayName("Тесты для получения информации о подписках пользователя")
 public class GetSubscriptionsTest {
+
     public List<String> idCode;
 
     @BeforeEach
