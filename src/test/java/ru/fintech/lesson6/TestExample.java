@@ -1,6 +1,4 @@
-package ru.fintech;
-import static ru.fintech.TestClass.testPow2positive;
-import static ru.fintech.TestClassL6.*;
+package ru.fintech.lesson6;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,6 +14,8 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.fintech.lesson6.TestClassL6.*;
+import static ru.fintech.lesson6.TestClass.*;
 
 
 public class TestExample {
