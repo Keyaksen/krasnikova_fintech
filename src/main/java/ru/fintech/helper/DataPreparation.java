@@ -1,5 +1,8 @@
 package ru.fintech.helper;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.json.JSONObject;
 import ru.fintech.request.RequestModel;
 
@@ -10,6 +13,7 @@ import static io.restassured.RestAssured.given;
 public class DataPreparation {
 
     //creating JSON object for POST query (TSC subscription)
+    @Description("Создание объекта JSON для TSC подписки")
     public static JSONObject createJSONObjectTSC(){
         JSONObject requestParams = new JSONObject();
         requestParams.put("instrument_id", "TCS_SPBXM");
@@ -20,6 +24,7 @@ public class DataPreparation {
     }
 
     //creating JSON object for POST query (AAPL subscription)
+    @Description("Создание объекта JSON для AAPL подписки")
     public static JSONObject createJSONObjectAAPL(){
         JSONObject requestParams = new JSONObject();
         requestParams.put("instrument_id", "AAPL_SPBXM");
@@ -30,6 +35,7 @@ public class DataPreparation {
     }
 
     //creating TSC subscription
+    @Step("Создание подписки TSC")
     public static void createTSCSubscription(){
         given().spec(RequestModel.getRequestSpecification())
                 .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
@@ -39,6 +45,7 @@ public class DataPreparation {
     }
 
     //creating AAPL subscription
+    @Step("Создание подписки AAPL")
     public static void createAAPLSubscription(){
         given().spec(RequestModel.getRequestSpecification())
                 .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
@@ -46,7 +53,7 @@ public class DataPreparation {
                 .body(createJSONObjectAAPL())
                 .post("/subscriptions");
     }
-
+    @Attachment("Получение id всех подписок пользователя")
     public static List<String> getIdCodeForDelete(){
         return given().spec(RequestModel.getRequestSpecification())
                 .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
@@ -57,7 +64,7 @@ public class DataPreparation {
                 .jsonPath()
                 .getList("id",String.class);
     }
-
+    @Step("Удаление {0} подписки")
     public static void deleteSubscription (String subscriptionId){
         given().spec(RequestModel.getRequestSpecification())
                 .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
@@ -67,6 +74,7 @@ public class DataPreparation {
 
     }
 
+    @Step("Удаление всех подписок пользователя")
     public static void deleteAllSubscriptions () {
         List<String> idSubs = given().spec(RequestModel.getRequestSpecification())
                 .queryParam("request_id","84g5df1g-5fg6-7d5f-1e61-874d54tfb15")
