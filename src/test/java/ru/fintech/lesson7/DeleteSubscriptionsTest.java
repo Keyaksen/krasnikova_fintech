@@ -29,7 +29,7 @@ public class DeleteSubscriptionsTest {
     @Link("https://fintech-trading-qa.tinkoff.ru/v1/md/docs/#/Subscriptions/md-contacts-subscription-concel")
     @Test
     @DisplayName("Deleting last subscription")
-    @Description("Удаление последней подписки, созданной пользователем")
+    @Step("Удаление последней подписки, созданной пользователем")
     @Tag("delete")
     @Severity(value = SeverityLevel.CRITICAL)
     public void deleteSubscriptionsTest(){
@@ -49,7 +49,7 @@ public class DeleteSubscriptionsTest {
     @Issue("TST-110")
     @Test
     @DisplayName("Deleting nonexistent subscription")
-    @Description("Удаление несуществующей подписки")
+    @Step("Удаление несуществующей подписки")
     @Tag("delete")
     @Owner(value = "Ваня Пирожков :)")
     public void deleteSubscriptionsErrorTest(){
