@@ -1,5 +1,6 @@
 package ru.fintech.lesson7;
 
+import io.qameta.allure.*;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import org.hamcrest.Matchers;
@@ -11,7 +12,10 @@ import ru.fintech.helper.DataPreparation;
 import ru.fintech.request.RequestModel;
 
 import static io.restassured.RestAssured.given;
-
+@Epic("Тесты подписки")
+@Feature("Тесты POST запросов")
+@Story("Создание подписок пользователя")
+@DisplayName("Тесты для создания подписок пользователя по siebel_id")
 public class PostSubscriptionsTest {
 
     @BeforeEach
@@ -19,8 +23,10 @@ public class PostSubscriptionsTest {
         DataPreparation.deleteAllSubscriptions();
     }
 
+    @Link("https://fintech-trading-qa.tinkoff.ru/v1/md/docs/#/Subscriptions/md-contacts-subscription-create")
     @Test
     @DisplayName("Creating price-alert subscription")
+    @Description("Создание подписки APPL и проверка её создания")
     @Tag("post")
     public void postSubscriptionsTest(){
         System.out.println("-----------\"POST\" Subscriptions test-----------");
@@ -40,8 +46,10 @@ public class PostSubscriptionsTest {
                 .body("ticker", Matchers.equalTo("AAPL"));
     }
 
+    @TmsLink("321123")
     @Test
     @DisplayName("Creating duplicate subscription")
+    @Description("Получение ошибки при создании повторяющейся подписки")
     @Tag("post")
     public void postDuplicateSubscriptionsTest(){
         DataPreparation.createTSCSubscription();

@@ -1,5 +1,6 @@
 package ru.fintech.lesson7;
 
+import io.qameta.allure.*;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import org.hamcrest.Matchers;
@@ -12,7 +13,10 @@ import ru.fintech.request.RequestModel;
 
 
 import static io.restassured.RestAssured.given;
-
+@Epic("Тесты подписки")
+@Feature("Тесты DELETE запросов")
+@Story("Удаление подписок пользователя")
+@DisplayName("Тесты для удаления подписок пользователя по siebel_id и subscription_id")
 public class DeleteSubscriptionsTest {
 
     @BeforeAll
@@ -22,10 +26,12 @@ public class DeleteSubscriptionsTest {
         DataPreparation.createAAPLSubscription();
     }
 
-
+    @Link("https://fintech-trading-qa.tinkoff.ru/v1/md/docs/#/Subscriptions/md-contacts-subscription-concel")
     @Test
     @DisplayName("Deleting last subscription")
+    @Step("Удаление последней подписки, созданной пользователем")
     @Tag("delete")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void deleteSubscriptionsTest(){
         System.out.println("-----------\"DELETE\" Subscriptions test-----------");
         given().spec(RequestModel.getRequestSpecification())
@@ -40,9 +46,12 @@ public class DeleteSubscriptionsTest {
                 .statusCode(200);
     }
 
+    @Issue("TST-110")
     @Test
     @DisplayName("Deleting nonexistent subscription")
+    @Step("Удаление несуществующей подписки")
     @Tag("delete")
+    @Owner(value = "Ваня Пирожков :)")
     public void deleteSubscriptionsErrorTest(){
         System.out.println("-----------\"DELETE\" SubscriptionsError test-----------");
         String idWrongCode = "123abc123";

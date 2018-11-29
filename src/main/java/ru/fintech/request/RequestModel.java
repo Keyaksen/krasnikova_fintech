@@ -1,5 +1,6 @@
 package ru.fintech.request;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.authentication.*;
 import io.restassured.builder.*;
 import io.restassured.http.ContentType;
@@ -15,6 +16,7 @@ public abstract class RequestModel {
                 .setBasePath(BASE_PATH)
                 .setAuth(authorization())
                 .addPathParam("siebel_id", "k.krasnikova")
+                .addFilter(new AllureRestAssured())
                 .build();
     }
 
